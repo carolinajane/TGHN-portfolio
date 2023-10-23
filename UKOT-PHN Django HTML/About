@@ -1,0 +1,4 @@
+This folder contains HTML I wrote to publish content on the UKOT-PHN hub on TGHN.
+The HTML is rather janky due to the restrictions placed on Django by the developers. 
+This includes restrictions on creating any CSS changes embedded into the HTML as script.
+Additionally, there isn't a lot of JavaScript accepted by the current Django set up for TGHN.
