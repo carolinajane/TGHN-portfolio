@@ -1,0 +1,4 @@
+This file is the first iteration of the map for the UKOT-PHN hub on TGHN.
+As I was having trouble working out the best way to set up the Shiny App R files, I wrote this to demonstrate to my senior colleague when I asked
+for help, what I would like the code to do and how I would like the app to work.
+Once he helped me set up the inital basis of the Shiny App, I was able to read the code and implement changes and adjustments.
