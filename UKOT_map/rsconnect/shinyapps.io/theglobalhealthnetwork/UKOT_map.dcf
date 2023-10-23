@@ -1,0 +1,14 @@
+name: UKOT_map
+title: UKOT_map
+username:
+account: theglobalhealthnetwork
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 10021289
+bundleId: 7739355
+url: https://theglobalhealthnetwork.shinyapps.io/UKOT_map/
+when: 1695913341.93798
+lastSyncTime: 1695913341.93802
+asMultiple: FALSE
+asStatic: FALSE
+ignoredFiles: server_sidebarTest.R

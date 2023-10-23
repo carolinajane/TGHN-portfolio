@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html style="margin: 0; border: 2px; border-color: #FFFFFF;">
+    <head style="margin: 0;">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+   integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+   crossorigin=""/>
+        <script src="https://tghn2.github.io/UKOT-PHN_map/leaflet.js"></script>
+        <!-- <script src="../src/L.Control.Sidebar.js"></script> -->
+        <link rel="stylesheet" href="plugins/leaflet-sidepanel.css" />
+        <script src="plugins/leaflet-sidepanel.min.js"></script>
+    </head>
+    <body>
+        <!-- Main Map container -->
+        <div id="map" aria-label="map" style="max-width: 900px; height: 506px; background-color: #007C91; align-content: center; vertical-align: center;">
+        <!-- Sidebar containers within map -->
+        <div id="mapSidebar" class="sidepanel" aria-label="side panel">
+            <div id="sidebar-content-wrapper">
+                <div id="sidebar-content">
+                    <div id="sidebar_gibralta" style="width: 270px; height: 480px; background-color: #FFFFFF; border: 2px;border-radius: 4px; border-color: #E40046; z-index: 1000; overflow-y: scroll; display: none;">
+                    <p style="font-family: proxima nova, noto sans, helvetica, arial, sans-serif;"><span style="font-size: 20pt; font-weight: bold; line-height: 24pt; color: #003B5C;">Gibralta</span><br /><span style="font-size: 16pt; line-height: 18pt;">Europe</span><br /><span style="font-size: 13pt; line-height: 15pt;"><i>Narrow pennisula on the Mediterranean coast of Spain.</i></span></p>
+                        <p style="font-family: proxima nova, noto sans, helvetica, arial, sans-serif;">
+                            <span style="font-size: 14pt; line-height: 16pt; color: #003B5C; font-weight: bold;">LOCATION & GEOGRAPHY</span><br /><b>Hemisphere:</b> Northern<br /><b>Island/non-island:</b> Non-island<br /><b>Size:</b> 6.8km<sup>2</sup><br /><b>Neighbouring/nearest countries:</b> Spain (land border) and Morocco (accessible by boat  depending on COVID-19 restrictions)<br /><b>Ocean:</b> Mediterranean/Atlantic<br /><b>Travel Route(s):</b> Regular flights from the UK. Can be accessed by land from Spain<br /><b>Terrain:</b> Gibraltar consists of  a limestone and shale ridge/cliffs, with no springs or rivers.<br /><b>Capital City:</b> Gibralta
+                        </p>
+                        <p style="font-family: proxima nova, noto sans, helvetica, arial, sans-serif;">
+                            <span style="font-size: 14pt; line-height: 16pt; color: #003B5C; font-weight: bold;">POPULATION</span><br /><b>Population:</b> 43,000 (2022)<br /><b>Main Language:</b> English
+                        </p>
+                        <p style="font-family: proxima nova, noto sans, helvetica, arial, sans-serif;">
+                            <span style="font-size: 14pt; line-height: 16pt; color: #003B5C; font-weight: bold;">CLIMATE</span><br />It has a mediterranean climate with warm summers and mild winters. <br />
+                        </p>
+                    </div>
+                </div>
+             </div>
+        </div>
+        </div>
+
+        <!-- Sidebar containers -->
+        <!-- <div id="sidebar"></div> -->
+
+<!--    <div id="sidebar_ascension">
+            <h1>Ascension</h1>
+        </div>
+
+        <div id="sidebar_sthelena">
+            <h1>St. Helena</h1>
+        </div>
+
+        <div id="sidebar_tristan">
+            <h1>Tristan da Cunha</h1>
+        </div>
+
+        <div id="sidebar_pitcairn">
+            <h1>Pitcairn</h1>
+        </div>
+
+        <div id="sidebar_falkland">
+            <h1>Falkland Islands</h1>
+        </div>
+
+        <div id="sidebar_montserrat">
+            <h1>Montserrat</h1>
+        </div>
+
+        <div id="sidebar_anguilla">
+            <h1>Anguilla</h1>
+        </div>
+
+        <div id="sidebar_virginislands">
+            <h1>British Virgin Islands</h1>
+        </div>
+
+        <div id="sidebar_turkscaicos">
+            <h1>Turks and Caicos</h1>
+        </div>
+
+        <div id="sidebar_caymanislands">
+            <h1>Cayman Islands</h1>
+        </div>
+
+        <div id="sidebar_bermunda">
+            <h1>Bermunda</h1>
+        </div> -->
+
+
+        <script type="text/javascript">
+            // Variables
+            var mapSW = [0, 16384],
+                mapNE = [16384, 0];
+
+            // Declare Map Object
+            var map = L.map('map').setView([-20, -10], 2);
+
+            // Reference the tiles
+            L.tileLayer('https://tghn2.github.io/UKOT-PHN_map/tiles/{z}/{x}/{y}.png', {
+                attribution: '© map designed by <a href="https://www.improperagency.com/">IMPROPER Agency</a> for <a href="https://ukot-phn.tghn.org/">UKOT-PHN</a> | Coded by <a href="https://tghn.org/">TGHN</a>',
+                minZoom: 0,
+                maxZoom: 6,
+                tms: false,
+                continuousWortld: false,
+                noWrap: true,
+                crs: L.CRS.Simple, 
+            }).addTo(map);
+
+            map.setMaxBounds(new L.LatLngBounds(
+                map.unproject(mapSW, map.getMaxZoom()),
+                map.unproject(mapNE, map.getMaxZoom())
+            )) 
+
+            // Set sidebar
+            // var sidebar = L.control.sidebar('sidebar', {closeButton: true, position: 'right'});
+            // map.addControl(sidebar);
+
+            // setTimeout(function () {
+               // sidebar.show();
+            // }, 500);
+
+            // map.on('click', function () {
+               // sidebar.hide();
+            // })
+
+            // L.DomEvent.on(sidebar.getCloseButton(), 'click', function () {
+               // console.log('Close button clicked.');
+            //});
+
+            // Icons/images for markers
+            var basicMarker = L.icon({
+                iconUrl: 'https://tghn2.github.io/UKOT-PHN_map/markers/Icon-Marker_BasicCircle.png',
+                iconSize: [20, 20],
+                iconAnchor: [0, 0],
+                popupAnchor: [10, 25],
+            })
+
+            var selectedMarker = L.icon({iconUrl: 'https://tghn2.github.io/UKOT-PHN_map/markers/Icon-Marker_Selected.png',
+                iconSize: [20, 20],
+                iconAnchor: [0,0],
+                popupAnchor: [10, 20]
+            })
+
+            var sidepanelMarker = L.icon({
+                iconUrl: 'https://tghn2.github.io/UKOT-PHN_map/markers/Icon-Marker_Selected-wSideBar.png',
+                IconSize: [24, 32.2642],
+                iconAnchor: [0,0],
+                popupAnchor: [12, 32.2642],
+            })
+
+            // Set button
+            // const button = document.createElement("button");
+            // button.innerHTML = "Read More";
+
+            // Define Button variable
+            
+
+            // Territory Markers
+            var marker_gibralta = L.marker([21.881189, 20.022461], {icon: basicMarker}).addTo(map).
+                bindPopup(
+                    '<p><span style="font-family: proxima nova, noto sans, helvetica, arial, sans-serif; color: #003B5C; font-size: 18pt; line-height: 20px;">Gibralta</span><br />Europe</p><p><b>Hemisphere:</b> Northern<br /><b>Island/Non-Island:</b> Non-Island<br /><b>Size:</b> 6.8km<sup>2</sup></p><p><b>Population:</b> 43,000 (2022)<br /><b>Main Language:</b> English</p>'
+                    +
+                    '<p><button id="gibralta_readmore" >Read More</button></p>'
+                );
+
+                marker_gibralta.on('click', function(e) {marker_gibralta.setIcon(selectedMarker);});
+                marker_gibralta.on('mouseover', function(e) {marker_gibralta.setIcon(selectedMarker)});
+                marker_gibralta.on('mouseout', function(e) {marker_gibralta.setIcon(basicMarker)});
+                marker_gibralta.getPopup().on('remove', function(e) {marker_gibralta.setIcon(basicMarker)});
+            
+            var marker_ascension = L.marker([-14.43468, 14.106445], {icon: basicMarker}).addTo(map).
+                bindPopup(
+                    '<p><span style="font-family: proxima nova, noto sans, helvetica, arial, sans-serif; color: #003B5C; font-size: 18pt; line-height: 20pt;">Ascension</span></p><p><b>Hemisphere:</b> Southern<br /><b>Island/Non-Island:</b> Island<br /><b>Size:</b>88km<sup>2</sup></p><p><b>Population:</b> 806 (2016)<br /><b>Main Language:</b> English</p><p><button id="ascension_readmore" style="text-align: center; background-color: #E40046; color: #FFFFFF; font-weight: bold; border-radius:3px; border:0;">Read More</button></p>'
+                );
+
+                marker_ascension.on('click', function(e) {marker_ascension.setIcon(selectedMarker);});
+                marker_ascension.on('mouseover', function(e) {marker_ascension.setIcon(selectedMarker)});
+                marker_ascension.on('mouseout', function(e) {marker_ascension.setIcon(basicMarker)});
+                marker_ascension.getPopup().on('remove', function(e) {marker_ascension.setIcon(basicMarker)});
+
+            var marker_shisland = L.marker([-22.512557, 19.665527], {icon:basicMarker}).addTo(map).bindPopup(
+                '<p><span style="font-family: proxima nova, noto sans, helvetica, arial, sans-serif; color: #003B5C; font-size: 18pt; line-height: 20px;">St. Helena</span></p><p><b>Hemisphere:</b> Southern<br /><b>Island/Non-Island:</b> Island<br /><b>Size:</b>122km<sup>2</sup></p><p><b>Population:</b> 4,439 (2021)<br /><b>Main Language:</b> English</p><p><button id="helena_readmore" style="text-align: center; background-color: #E40046; color: #FFFFFF; font-weight: bold; border-radius:3px; border:0;">Read More</button></p>'
+            );
+
+            marker_shisland.on('click', function(e) {marker_shisland.setIcon(selectedMarker);});
+                marker_shisland.on('mouseover', function(e) {marker_shisland.setIcon(selectedMarker)});
+                marker_shisland.on('mouseout', function(e) {marker_shisland.setIcon(basicMarker)});
+                marker_shisland.getPopup().on('remove', function(e) {marker_shisland.setIcon(basicMarker)});
+
+            var marker_tristan = L.marker([-38.099983, 18.852539], {icon: basicMarker}).addTo(map).
+                bindPopup(
+                    '<p><span style="font-family: proxima nova, noto sans, helvetica, arial, sans-serif; color: #003B5C; font-size: 18pt; line-height: 20px;">Tristan da Cunha</span></p><p><b>Hemisphere:</b> Southern<br /><b>Island/Non-Island:</b> part of a group of islands<br /><b>Size:</b> 207km<sup>2</sup></p><p><b>Population:</b> 241<br /><b>Main Language:</b> English</p><p><button id="tristan_readmore" style="text-align: center; background-color: #E40046; color: #FFFFFF; font-weight: bold; border-radius:3px; border:0;">Read More</button></p>'
+                );
+
+                marker_tristan.on('click', function(e) {marker_tristan.setIcon(selectedMarker);});
+                marker_tristan.on('mouseover', function(e) {marker_tristan.setIcon(selectedMarker)});
+                marker_tristan.on('mouseout', function(e) {marker_tristan.setIcon(basicMarker)});
+                marker_tristan.getPopup().on('remove', function(e) {marker_tristan.setIcon(basicMarker)});
+            
+            var marker_pitcairn = L.marker([-27.137369, -72.355957], {icon: basicMarker}).addTo(map).
+                bindPopup(
+                    '<p><span style="font-family: proxima nova, noto sans, helvetica, arial, sans-serif; color: #003B5C; font-size: 18pt; line-height: 20px;">Pitcairn</span></p><p><b>Hemisphere:</b> Southern<br /><b>Island/Non-Island:</b> Island<br /><b>Size:</b> 47km<sup>2</sup></p><p><b>Population:</b> 47<br /><b>Main Language:</b> English, Pitkern</p><p><button id="pitcairn_readmore" style="text-align: center; background-color: #E40046; color: #FFFFFF; font-weight: bold; border-radius:3px; border:0;">Read More</button></p>'
+                );
+
+                marker_pitcairn.on('click', function(e) {marker_pitcairn.setIcon(selectedMarker);});
+                marker_pitcairn.on('mouseover', function(e) {marker_pitcairn.setIcon(selectedMarker)});
+                marker_pitcairn.on('mouseout', function(e) {marker_pitcairn.setIcon(basicMarker)});
+                marker_pitcairn.getPopup().on('remove', function(e) {marker_pitcairn.setIcon(basicMarker)});      
+                    
+            var marker_falklands = L.marker([-46.468133, -12.941895], {icon: basicMarker}).addTo(map).
+                bindPopup(
+                    '<p><span style="font-family: proxima nova, noto sans, helvetica, arial, sans-serif; color: #003B5C; font-size: 18pt; line-height: 20px;">Falkland Islands</span></p><p><b>Hemisphere:</b> Southern<br /><b>Island/Non-Island:</b> a group of islands<br /><b>Size:</b> 207km<sup>2</sup></p><p><b>Population:</b> 241<br /><b>Main Language:</b> English</p><p><button id="falklands_readmore" style="text-align: center; background-color: #E40046; color: #FFFFFF; font-weight: bold; border-radius:3px; border:0;">Read More</button></p>'
+                );
+        
+                marker_falklands.on('click', function(e) {marker_falklands.setIcon(selectedMarker);});
+                marker_falklands.on('mouseover', function(e) {marker_falklands.setIcon(selectedMarker)});
+                marker_falklands.on('mouseout', function(e) {marker_falklands.setIcon(basicMarker)});
+                marker_falklands.getPopup().on('remove', function(e) {marker_falklands.setIcon(basicMarker)});
+                    
+            var marker_montserrat = L.marker([4.784469, -17.402344], {icon: basicMarker}).addTo(map).
+                bindPopup(
+                    '<p><span style="font-family: proxima nova, noto sans, helvetica, arial, sans-serif; color: #003B5C; font-size: 18pt; line-height: 20px; text-align: Left;">Montserrat</span></p><p><b>Hemisphere:</b> Northern<br /><b>Island/Non-Island:</b> Island<br /><b>Size:</b> 102km<sup>2</sup></p><p><b>Population:</b> 4,566 (2018)<br /><b>Main Language:</b> English, Montserrat Creole</p><p><button id="montserrat_readmore" style="text-align: center; background-color: #E40046; color: #FFFFFF; font-weight: bold; border-radius:3px; border:0;">Read More</button></p>'
+                );
+
+                marker_montserrat.on('click', function(e) {marker_montserrat.setIcon(selectedMarker);});
+                marker_montserrat.on('mouseover', function(e) {marker_montserrat.setIcon(selectedMarker)});
+                marker_montserrat.on('mouseout', function(e) {marker_montserrat.setIcon(basicMarker)});
+                marker_montserrat.getPopup().on('remove', function(e) {marker_montserrat.setIcon(basicMarker)});
+            
+            var marker_anguilla = L.marker([7.928675, -19.879336], {icon: basicMarker}).addTo(map).
+                bindPopup(
+                    '<p><span style="font-family: proxima nova, noto sans, helvetica, arial, sans-serif; color: #003B5C; font-size: 18pt; line-height: 20px; text-align: Left;">Anguilla</span></p><p><b>Hemisphere:</b> Northern<br /><b>Island/Non-Island:</b> Island<br /><b>Size:</b> 91km<sup>2</sup></p><p><b>Population:</b> 15,500 (2020)<br /><b>Main Language:</b> English, Montserrat Creole</p><p><button id="anguilla_readmore" style="text-align: center; background-color: #E40046; color: #FFFFFF; font-weight: bold; border-radius:3px; border:0;">Read More</button></p>'
+                );
+
+                marker_anguilla.on('click', function(e) {marker_anguilla.setIcon(selectedMarker);});
+                marker_anguilla.on('mouseover', function(e) {marker_anguilla.setIcon(selectedMarker)});
+                marker_anguilla.on('mouseout', function(e) {marker_anguilla.setIcon(basicMarker)});
+                marker_anguilla.getPopup().on('remove', function(e) {marker_anguilla.setIcon(basicMarker)});
+            
+            var marker_britishvirginislands = L.marker([8.55924, -23.862305], {icon:basicMarker}).addTo(map).
+                bindPopup(
+                    '<p><span style="font-family: proxima nova, noto sans, helvetica, arial, sans-serif; color: #003B5C; font-size: 18pt; line-height: 20px; text-align: Left;">British Virgin Islands</span></p><p><b>Hemisphere:</b> Northern<br /><b>Island/Non-Island:</b> Islands<br /><b>Size:</b> 153km<sup>2</sup></p><p><b>Population:</b> 28,054 (2010)<br /><b>Main Language:</b> English</p><p><button id = "britishvirginislands_readmore" style="text-align: center; background-color: #E40046; color: #FFFFFF; font-weight: bold; border-radius:3px; border:0;">Read More</button></p>'
+                );
+
+                marker_britishvirginislands.on('mouseover', function(e) {marker_britishvirginislands.setIcon(selectedMarker)});
+                marker_britishvirginislands.on('mouseout', function(e) {marker_britishvirginislands.setIcon(basicMarker)});
+                marker_britishvirginislands.on('click', function(e) {marker_britishvirginislands.setIcon(selectedMarker);});
+                marker_britishvirginislands.getPopup().on('remove', function(e) {marker_britishvirginislands.setIcon(basicMarker)});
+
+            var marker_turkscaicos = L.marker([11.630716, -29.729004], {icon:basicMarker}).addTo(map).
+                bindPopup(
+                    '<p><span style="font-family: proxima nova, noto sans, helvetica, arial, sans-serif; color: #003B5C; font-size: 18pt; line-height: 20px; text-align: Left;">Turks and Caicos</span></p><p><b>Hemisphere:</b> Northern<br /><b>Island/Non-Island:</b> Islands<br /><b>Size:</b> 616km<sup>2</sup> at high tide, 948km<sup>2</sup> at low tide</p><p><b>Population:</b> 44,542 (2020)<br /><b>Main Language:</b> English</p><p><button id = "turkscaicos_readmore" style="text-align: center; background-color: #E40046; color: #FFFFFF; font-weight: bold; border-radius:3px; border:0;">Read More</button></p>'
+                );
+            
+                marker_turkscaicos.on('click', function(e) {marker_turkscaicos.setIcon(selectedMarker);});
+                marker_turkscaicos.on('mouseover', function(e) {marker_turkscaicos.setIcon(selectedMarker)});
+                marker_turkscaicos.on('mouseout', function(e) {marker_turkscaicos.setIcon(basicMarker)});
+                marker_turkscaicos.getPopup().on('remove', function(e) {marker_turkscaicos.setIcon(basicMarker)});    
+
+            var marker_caymanislands = L.marker([7.776309, -36.254883], {icon:basicMarker}).addTo(map).
+                bindPopup(
+                    '<p><span style="font-family: proxima nova, noto sans, helvetica, arial, sans-serif; color: #003B5C; font-size: 18pt; line-height: 20px; text-align: Left;">Cayman Islands</span></p><p><b>Hemisphere:</b> Northern<br /><b>Island/Non-Island:</b> Islands<br /><b>Size:</b> 264km<sup>2</sup></p><p><b>Population:</b> 65, 786 (2020)<br /><b>Main Language:</b> English</p><p><button id = "caymanislands_readmore" style="text-align: center; background-color: #E40046; color: #FFFFFF; font-weight: bold; border-radius:3px; border:0;">Read More</button></p>'
+                );
+            
+                marker_caymanislands.on('click', function(e) {marker_caymanislands.setIcon(selectedMarker);});
+                marker_caymanislands.on('mouseover', function(e) {marker_caymanislands.setIcon(selectedMarker)});
+                marker_caymanislands.on('mouseout', function(e) {marker_caymanislands.setIcon(basicMarker)});
+                marker_caymanislands.getPopup().on('remove', function(e) {marker_caymanislands.setIcon(basicMarker)});
+
+            var marker_bermunda = L.marker([20.427013, -22.214355], {icon:basicMarker}).addTo(map).
+                bindPopup(
+                    '<p><span style="font-family: proxima nova, noto sans, helvetica, arial, sans-serif; color: #003B5C; font-size: 18pt; line-height: 20px; text-align: Left;">Bermunda</span></p><p><b>Hemisphere:</b> Northern<br /><b>Island/Non-Island:</b> Islands<br /><b>Size:</b> 54km<sup>2</sup></p><p><b>Population:</b> 63, 779 (2016)<br /><b>Main Language:</b> English</p><p><button id = "bermunda_readmore" style="text-align: center; background-color: #E40046; color: #FFFFFF; font-weight: bold; border-radius:3px; border:0;">Read More</button></p>'
+                );
+
+                marker_bermunda.on('click', function(e) {marker_bermunda.setIcon(selectedMarker);});
+                marker_bermunda.on('mouseover', function(e) {marker_bermunda.setIcon(selectedMarker)});
+                marker_bermunda.on('mouseout', function(e) {marker_bermunda.setIcon(basicMarker)});
+                marker_bermunda.getPopup().on('remove', function(e) {marker_bermunda.setIcon(basicMarker)});
+
+        </script>
+    </body>
+</html>
